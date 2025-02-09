@@ -30,7 +30,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        
             $request->validate([
                 'nome' => 'required|max:255',
                 'cpf' => 'required|size:11|unique:clientes,cpf',
@@ -61,12 +61,7 @@ class ClienteController extends Controller
             ]);
     
             return redirect()->route('clientes.index')->with('sucesso', 'Cliente cadastrado com sucesso!');
-        } catch (\Exception $e) {
-            return response()->json([
-                'erro' => 'Erro ao cadastrar cliente.',
-                'mensagem' => $e->getMessage(),
-            ], 500);
-        }
+        
     }
 
     /**
