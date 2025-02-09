@@ -69,7 +69,8 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $cliente = Cliente::with('endereco')->findOrFail($id);
+        return view('clientes.show', compact('cliente'));
     }
 
     /**
