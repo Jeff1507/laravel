@@ -3,8 +3,8 @@
 @section('title', 'Informações do Cliente')
 
 @section('content')
-    <div class="flex items-start gap-4">
-        <div class="bg-white p-10 rounded-lg flex flex-col items-center justify-center gap-6 w-[380px]">
+    <div class="flex items-start gap-4 bg-white p-10 rounded-lg">
+        <div class="flex flex-col items-center justify-center gap-6 w-[300px]">
             <div class="flex flex-col gap-2 items-center justify-center">
                 <div class="w-24 h-24 rounded-full bg-gray-100"></div>
                 <h3 class="text-2xl text-gray-600">{{ $cliente->nome }}</h3>
@@ -23,22 +23,27 @@
                     {{ $cliente->email }}
                 </p>
             </div>
-            <a href="{{ route('clientes.index') }}" class="bg-blue-600 cursor-pointer hover:bg-blue-800 px-4 py-2 text-white font-medium max-w-max rounded-lg ">
-                Voltar
-            </a>
-            <!--<div class="flex gap-2 items-center justify-between w-full">
-                <a href="#" class="bg-blue-600 cursor-pointer hover:bg-blue-800 px-4 py-2 text-white font-medium rounded-lg w-1/2 flex items-center gap-1">
+            <div class="flex flex-col gap-2 items-center justify-between w-full">
+                <a href="{{ route('clientes.edit', $cliente->id) }}" class="bg-blue-600 cursor-pointer hover:bg-blue-800 px-4 py-2 text-white font-medium rounded-lg w-full flex items-center justify-center gap-1">
                     @svg('heroicon-s-pencil-square', 'w-5 h-5')
                     Editar Cliente
                 </a>
-                <a href="#" class="bg-red-500 cursor-pointer hover:bg-red-700 px-4 py-2 text-white font-medium rounded-lg w-1/2 flex items-center gap-1">
-                @svg('heroicon-s-trash', 'w-5 h-5')
-                    Excluir Cliente
+                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" class="w-full">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 cursor-pointer hover:bg-red-700 px-4 py-2 text-white font-medium rounded-lg w-full flex items-center justify-center gap-1">
+                        @svg('heroicon-s-trash', 'w-5 h-5')
+                        Excluir Cliente
+                    </button>
+                </form>
+                <a href="{{ route('clientes.index') }}" class="bg-purple-500 cursor-pointer hover:bg-purple-800 px-4 py-2 text-white font-medium rounded-lg w-full flex justify-center items-center gap-1">
+                    @svg('heroicon-c-arrow-left-circle', 'w-5 h-5')
+                    Voltar
                 </a>
-            </div>-->
+            </div>
         </div>
-
-        <div class="bg-white p-10 rounded-lg space-y-6 flex-1">
+        <div class="w-px h-[420px] bg-gray-300 mr-3"></div>
+        <div class="space-y-6 flex-1">
             <div class="flex items-center gap-1.5">
                 @svg('heroicon-s-map-pin', 'w-6 h-6 text-gray-600')
                 <h2 class="font-bold text-2xl text-gray-600">Endereço do Cliente</h2>
@@ -78,12 +83,6 @@
                         <p class="text-lg font-medium text-gray-600">Nenhum complemento foi informado!</p>
                     @endif
                 </div>
-            </div>
-            <div>
-                <a href="#" class="bg-blue-600 cursor-pointer hover:bg-blue-800 px-4 py-2 text-white font-medium max-w-max rounded-lg flex items-center gap-1">
-                    @svg('heroicon-s-pencil-square', 'w-5 h-5')
-                    Editar Endereço
-                </a>
             </div>
         </div>
     </div>

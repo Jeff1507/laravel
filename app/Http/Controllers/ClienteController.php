@@ -78,7 +78,8 @@ class ClienteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $cliente = Cliente::with('endereco')->findOrFail($id);
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -86,7 +87,34 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required|max:255',
+            'cpf' => 'required|size:11|unique:clientes,cpf,' . $id,
+            'email' => 'required|email|max:255|unique:clientes,email,' . $id,
+            'telefone' => 'required|max:11',
+            'cep' => 'required|size:8',
+            'rua' => 'required|max:255',
+            'bairro' => 'required|max:255',
+            'cidade' => 'required|max:255',
+            'estado' => 'required|max:255',
+            'numero' => 'required|max:10',
+            'complemento' => 'nullable|max:255',
+        ]);
+
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->only('nome', 'cpf', 'email', 'telefone'));
+
+        $cliente->endereco->update([
+            'cep' => $request->cep,
+            'rua' => $request->rua,
+            'bairro' => $request->bairro,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'numero' => $request->numero,
+            'complemento' => $request->complemento,
+        ]);
+
+        return redirect()->route('clientes.index')->with('sucesso', 'Cliente atualizado com sucesso!');
     }
 
     /**
@@ -94,6 +122,9 @@ class ClienteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $cliente->delete();
+
+        return redirect()->route('clientes.index')->with('sucesso', 'Cliente e endereço removidos com sucesso.');
     }
 }
