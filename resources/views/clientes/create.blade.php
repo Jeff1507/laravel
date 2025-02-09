@@ -1,37 +1,88 @@
-<form action="{{ route('clientes.store') }}" method="POST">
-    @csrf
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" required>
+@extends('layouts.app')
 
-    <label for="cpf">CPF:</label>
-    <input type="text" name="cpf" required>
+@section('title', 'Cadastro de Cliente')
 
-    <label for="email">Email:</label>
-    <input type="text" name="email" required>
+@section('content')
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-gray-700 mb-4">Cadastro de Cliente</h2>
+    {{-- Exibição de erros de validação --}}
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <strong>Erro no cadastro:</strong>
+            <ul class="mt-2">
+                @foreach ($errors->all() as $error)
+                    <li class="text-sm">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <label for="telefone">Telefone:</label>
-    <input type="text" name="telefone" required>
+    <form action="{{ route('clientes.store') }}" method="POST" class="space-y-4">
+        @csrf
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="nome" class="block font-semibold text-gray-600">Nome:</label>
+                <input type="text" name="nome" class="w-full p-2 border rounded" required>
+            </div>
 
-    <label for="cep">CEP:</label>
-    <input type="text" name="cep" required>
+            <div>
+                <label for="cpf" class="block font-semibold text-gray-600">CPF:</label>
+                <input type="text" name="cpf" class="w-full p-2 border rounded" required>
+            </div>
 
-    <label for="rua">Rua:</label>
-    <input type="text" name="rua" required>
+            <div>
+                <label for="email" class="block font-semibold text-gray-600">Email:</label>
+                <input type="email" name="email" class="w-full p-2 border rounded" required>
+            </div>
 
-    <label for="bairro">Bairro:</label>
-    <input type="text" name="bairro" required>
+            <div>
+                <label for="telefone" class="block font-semibold text-gray-600">Telefone:</label>
+                <input type="text" name="telefone" class="w-full p-2 border rounded" required>
+            </div>
+        </div>
 
-    <label for="cidade">Cidade:</label>
-    <input type="text" name="cidade" required>
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <label for="cep" class="block font-semibold text-gray-600">CEP:</label>
+                <input type="text" name="cep" class="w-full p-2 border rounded" required>
+            </div>
 
-    <label for="estado">Estado:</label>
-    <input type="text" name="estado" required>
+            <div>
+                <label for="rua" class="block font-semibold text-gray-600">Rua:</label>
+                <input type="text" name="rua" class="w-full p-2 border rounded" required>
+            </div>
 
-    <label for="numero">Numero:</label>
-    <input type="text" name="numero" required>
+            <div>
+                <label for="bairro" class="block font-semibold text-gray-600">Bairro:</label>
+                <input type="text" name="bairro" class="w-full p-2 border rounded" required>
+            </div>
+        </div>
 
-    <label for="complemento">Complemento:</label>
-    <textarea name="complemento" id="complemento"></textarea>
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <label for="cidade" class="block font-semibold text-gray-600">Cidade:</label>
+                <input type="text" name="cidade" class="w-full p-2 border rounded" required>
+            </div>
 
-    <input type="submit" value="Cadastrar">
-</form>
+            <div>
+                <label for="estado" class="block font-semibold text-gray-600">Estado:</label>
+                <input type="text" name="estado" class="w-full p-2 border rounded" required>
+            </div>
+
+            <div>
+                <label for="numero" class="block font-semibold text-gray-600">Número:</label>
+                <input type="text" name="numero" class="w-full p-2 border rounded" required>
+            </div>
+        </div>
+
+        <div>
+            <label for="complemento" class="block font-semibold text-gray-600">Complemento:</label>
+            <textarea name="complemento" class="w-full p-2 border rounded"></textarea>
+        </div>
+
+        <div class="mt-4">
+            <input type="submit" value="Cadastrar" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        </div>
+    </form>
+</div>
+@endsection

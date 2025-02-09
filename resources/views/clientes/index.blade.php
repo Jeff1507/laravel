@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('title', 'Clientes')
+
 @if (session('sucesso'))
     <div class="sucesso">
         {{session('sucesso')}}
@@ -16,7 +20,7 @@
     <table>
         <thead>
             <tr>
-                <th>Nome</th>
+                <th class="bg-red-500">Nome</th>
                 <th>CPF</th>
                 <th>Email</th>
                 <th>Telefone</th>
