@@ -3,16 +3,16 @@
 @section('title', 'Clientes')
 
 @section('content')
-    @if (session('sucesso'))
-        <div class="sucesso">
-            {{session('sucesso')}}
-        </div>
-    @elseif(session('erro'))
-        <div class="erro">
-            {{session('erro')}}
-        </div>
-    @endif
     <div class="flex flex-col gap-4 max-w-4xl mx-auto">
+        @if (session('sucesso'))
+            <div class="sucesso">
+                {{session('sucesso')}}
+            </div>
+        @elseif(session('erro'))
+            <div class="erro">
+                {{session('erro')}}
+            </div>
+        @endif
         <div class="flex items-center justify-between w-full">
             <form class="max-w-md flex-1">   
                 <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Pesquisar</label>

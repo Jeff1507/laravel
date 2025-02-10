@@ -25,7 +25,7 @@
 
                 <div>
                     <label for="telefone" class="block font-semibold text-gray-600">Telefone</label>
-                    <input type="text" name="telefone" id="telefone" class="w-full p-2 border rounded" required maxlength="11">
+                    <input type="text" name="telefone" id="telefone" class="w-full p-2 border rounded" required maxlength="14">
                 </div>
             </div>
 
