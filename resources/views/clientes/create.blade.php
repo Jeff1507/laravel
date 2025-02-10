@@ -77,7 +77,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+        @endif
 
         <div class="mt-4 flex items-center justify-between">
             <a href="{{ route('clientes.index') }}" class="bg-red-500 px-4 py-2 text-white rounded">Voltar</a>

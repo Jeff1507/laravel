@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Cadastrar Categoria')
+@section('title', 'Editar Categoria')
 
 @section('content')
-    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold text-gray-700 mb-4">Cadastro de Categorias</h2>
-        <form action="{{ route('categorias.store') }}" method="POST" class="space-y-4">
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-700 mb-4">Editar Categoria</h2>
+        <form action="{{ route('categorias.update', $categoria->id) }}" method="POST" class="space-y-4">
             @csrf
+            @method('PUT')
+
             <div class="grid gap-4">
                 <div>
                     <label for="nome" class="block font-semibold text-gray-600">Nome</label>
-                    <input type="text" name="nome" class="w-full p-2 border rounded" required>
+                    <input type="text" name="nome" class="w-full p-2 border rounded" value="{{ old('nome', $categoria->nome) }}" required>
                 </div>
                 <div>
                     <label for="descricao" class="block font-semibold text-gray-600">Descrição</label>
-                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded" required></textarea>
+                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded" required>{{ old('descricao', $categoria->descricao) }}</textarea>
                 </div>
             </div>
             @if ($errors->any())
@@ -29,9 +31,8 @@
             @endif
             <div class="mt-4 flex items-center justify-between">
                 <a href="{{ route('categorias.index') }}" class="bg-red-500 px-4 py-2 text-white rounded">Voltar</a>
-                    <input type="submit" value="Cadastrar Categoria" class="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-800">
+                    <input type="submit" value="Editar Categoria" class="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-800">
             </div>
         </form>
     </div>
 @endsection
-

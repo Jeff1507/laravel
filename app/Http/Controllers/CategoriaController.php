@@ -53,7 +53,8 @@ class CategoriaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -61,7 +62,14 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nome'=> 'required|max:255',
+            'descricao'=> 'required|max:255',
+        ]);
+
+        Categoria::findOrFail($id)->update($request->all());
+
+        return redirect()->route('categorias.index')->with('sucesso','Categoria atualizada com sucesso!');
     }
 
     /**
@@ -69,6 +77,9 @@ class CategoriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        $categoria->delete();
+
+        return redirect()->route('categorias.index')->with('sucesso', 'Categoria removida com sucesso!');
     }
 }
