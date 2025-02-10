@@ -10,29 +10,29 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label for="nome" class="block font-semibold text-gray-600">Nome</label>
-                    <input type="text" name="nome" class="w-full p-2 border rounded" pattern="^[^ ].+[^ ]$" required>
+                    <input type="text" name="nome" id="nome" class="w-full p-2 border rounded" pattern="^[^ ].+[^ ]$" required>
                 </div>
 
                 <div>
                     <label for="cpf" class="block font-semibold text-gray-600">CPF</label>
-                    <input type="text" name="cpf" class="w-full p-2 border rounded" required>
+                    <input type="text" name="cpf" id="cpf" class="w-full p-2 border rounded" required maxlength="14">
                 </div>
 
                 <div>
                     <label for="email" class="block font-semibold text-gray-600">Email</label>
-                    <input type="email" name="email" class="w-full p-2 border rounded" required>
+                    <input type="email" name="email" id="email" class="w-full p-2 border rounded" required>
                 </div>
 
                 <div>
                     <label for="telefone" class="block font-semibold text-gray-600">Telefone</label>
-                    <input type="text" name="telefone" class="w-full p-2 border rounded" required>
+                    <input type="text" name="telefone" id="telefone" class="w-full p-2 border rounded" required maxlength="11">
                 </div>
             </div>
 
             <div class="grid grid-cols-3 gap-4">
                 <div>
                     <label for="cep" class="block font-semibold text-gray-600">CEP</label>
-                    <input type="text" name="cep" id="cep" class="w-full p-2 border rounded" required>
+                    <input type="text" name="cep" id="cep" class="w-full p-2 border rounded" required maxlength="9">
                 </div>
 
                 <div>
@@ -59,13 +59,13 @@
 
                 <div>
                     <label for="numero" class="block font-semibold text-gray-600">Número</label>
-                    <input type="text" name="numero" class="w-full p-2 border rounded" required>
+                    <input type="text" name="numero" id="numero" class="w-full p-2 border rounded" required>
                 </div>
             </div>
 
             <div>
                 <label for="complemento" class="block font-semibold text-gray-600">Complemento</label>
-                <textarea name="complemento" class="w-full p-2 border rounded"></textarea>
+                <textarea name="complemento" id="complemento" class="w-full p-2 border rounded"></textarea>
             </div>
 
             @if ($errors->any())
@@ -85,8 +85,36 @@
             </div>
         </form>
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll("input, textarea");
+
+            
+
+            inputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    if (this.name === "cpf") {
+                        this.value = this.value.replace(/\D/g, "");
+                        if (this.value.length > 11) this.value = this.value.substring(0, 11);
+                        if (this.value.length === 11) {
+                            this.value = this.value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+                        }
+                    } else if (this.name === "cep") {
+                        this.value = this.value.replace(/\D/g, "");
+                        if (this.value.length > 8) this.value = this.value.substring(0, 8);
+                        if (this.value.length === 8) {
+                            this.value = this.value.replace(/(\d{5})(\d{3})/, "$1-$2");
+                        }
+                    } else if (this.name === "telefone") {
+                        this.value = this.value.replace(/\D/g, "").substring(0, 11);
+                    } else if (this.name === "numero") {
+                        this.value = this.value.replace(/\D/g, "").substring(0, 10);
+                    }
+                });
+            });
+
+            // Busca endereço pelo CEP
             document.getElementById("cep").addEventListener("blur", function () {
                 let cep = this.value.replace(/\D/g, '');
 
