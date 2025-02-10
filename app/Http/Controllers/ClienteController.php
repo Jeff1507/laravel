@@ -45,10 +45,8 @@ class ClienteController extends Controller
                 'complemento' => 'nullable|max:255',
             ]);
     
-            // Criar cliente
             $cliente = Cliente::create($request->only('nome', 'cpf', 'email', 'telefone'));
     
-            // Criar endereço
             Endereco::create([
                 'cliente_id' => $cliente->id,
                 'cep' => $request->cep,
