@@ -87,10 +87,10 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:255',
-            'cpf' => 'required|size:11|unique:clientes,cpf,' . $id,
+            'cpf' => 'required|size:14|unique:clientes,cpf,' . $id,
             'email' => 'required|email|max:255|unique:clientes,email,' . $id,
             'telefone' => 'required|max:11',
-            'cep' => 'required|size:8',
+            'cep' => 'required|size:9',
             'rua' => 'required|max:255',
             'bairro' => 'required|max:255',
             'cidade' => 'required|max:255',
