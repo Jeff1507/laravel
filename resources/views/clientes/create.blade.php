@@ -116,6 +116,11 @@
             document.getElementById("cep").addEventListener("blur", function () {
                 let cep = this.value.replace(/\D/g, '');
 
+                document.getElementById("rua").value = "";
+                document.getElementById("bairro").value = "";
+                document.getElementById("cidade").value = "";
+                document.getElementById("estado").value = "";
+
                 if (cep.length === 8) {
                     fetch(`https://viacep.com.br/ws/${cep}/json/`)
                         .then(response => response.json())

@@ -75,10 +75,10 @@
                 </div>
 
                 
-                <div class="col-span-full">
+                <div class="col-span-full w-full">
                     <h3 class="font-light text-sm">Complemento</h3>
                     @if($cliente->endereco->complemento)
-                        <p class="text-lg font-medium text-gray-600">{{ $cliente->endereco->complemento }}</p>
+                        <p class="text-lg font-medium text-gray-600 whitespace-normal w-full">{{ $cliente->endereco->complemento }}</p>
                     @else
                         <p class="text-lg font-medium text-gray-600">Nenhum complemento foi informado!</p>
                     @endif
