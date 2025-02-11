@@ -4,6 +4,10 @@ use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
 Route::get('/categorias', [CategoriaController::class,'index']);
 Route::resource('categorias', CategoriaController::class);
 
