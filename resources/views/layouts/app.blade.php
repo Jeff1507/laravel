@@ -25,8 +25,8 @@
                 @svg('heroicon-s-list-bullet', 'w-5 h-5')
                 Categorias
             </a>
-            <a href="#" class="flex items-center gap-1 font-medium text-lg">
-                @svg('heroicon-s-currency-dollar', 'w-5 h-5')
+            <a href="{{ route('unidades.index') }}" class="flex items-center gap-1 font-medium text-lg">
+                @svg('heroicon-c-percent-badge', 'w-5 h-5')
                 Unidades de Medida
             </a>
         </div>

@@ -4,7 +4,12 @@
 
 @section('content')
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold text-gray-700 mb-4">Cadastro de Cliente</h2>
+        <div class="flex flex-col gap-2 w-full items-center justify-center">
+            <div class="p-3 bg-blue-600 rounded-full">
+                @svg('heroicon-s-user-group', 'w-16 h-16 text-white')
+            </div>
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">Cadastrar Cliente</h2>
+        </div>
         <form action="{{ route('clientes.store') }}" method="POST" class="space-y-4">
             @csrf
             <div class="grid grid-cols-2 gap-4">
