@@ -32,7 +32,7 @@ class CategoriaController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:255',
-            'descricao' => 'required|max:255',
+            'descricao' => 'nullable|max:255',
         ]);
 
         Categoria::create($request->all());
@@ -64,7 +64,7 @@ class CategoriaController extends Controller
     {
         $request->validate([
             'nome'=> 'required|max:255',
-            'descricao'=> 'required|max:255',
+            'descricao'=> 'nullable|max:255',
         ]);
 
         Categoria::findOrFail($id)->update($request->all());

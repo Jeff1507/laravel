@@ -12,11 +12,11 @@
             <div class="grid gap-4">
                 <div>
                     <label for="nome" class="block font-semibold text-gray-600">Nome</label>
-                    <input type="text" name="nome" class="w-full p-2 border rounded" value="{{ old('nome', $categoria->nome) }}" required>
+                    <input type="text" name="nome" class="w-full p-2 border rounded" pattern="^[^ ].+[^ ]$" value="{{ old('nome', $categoria->nome) }}" required>
                 </div>
                 <div>
                     <label for="descricao" class="block font-semibold text-gray-600">Descrição</label>
-                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded" required>{{ old('descricao', $categoria->descricao) }}</textarea>
+                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded">{{ old('descricao', $categoria->descricao) }}</textarea>
                 </div>
             </div>
             @if ($errors->any())

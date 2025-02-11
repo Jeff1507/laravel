@@ -10,11 +10,11 @@
             <div class="grid gap-4">
                 <div>
                     <label for="nome" class="block font-semibold text-gray-600">Nome</label>
-                    <input type="text" name="nome" class="w-full p-2 border rounded" required>
+                    <input type="text" name="nome" class="w-full p-2 border rounded" pattern="^[^ ].+[^ ]$" required>
                 </div>
                 <div>
                     <label for="descricao" class="block font-semibold text-gray-600">Descrição</label>
-                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded" required></textarea>
+                    <textarea name="descricao" id="descricao" class="w-full p-2 border rounded"></textarea>
                 </div>
             </div>
             @if ($errors->any())
