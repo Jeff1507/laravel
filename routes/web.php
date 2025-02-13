@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UnidadeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
@@ -17,3 +18,6 @@ Route::resource('clientes', ClienteController::class);
 
 Route::get('/unidades', [UnidadeController::class,'index']);
 Route::resource('unidades', UnidadeController::class);
+
+Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::resource('produtos', ProdutoController::class);
