@@ -11,9 +11,16 @@ class ClienteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::with('endereco')->get();
+        $query = Cliente::with('endereco');
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('nome', 'LIKE', "%{$search}%");
+        }
+
+        $clientes = $query->get();
+
         return view('clientes.index', compact('clientes'));
     }
 
