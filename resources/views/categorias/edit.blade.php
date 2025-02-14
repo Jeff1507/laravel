@@ -3,7 +3,7 @@
 @section('title', 'Editar Categoria')
 
 @section('content')
-<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="w-[350px] mx-auto bg-white p-6 rounded-lg shadow-lg">
         <div class="flex flex-col gap-2 w-full items-center justify-center">
             <div class="p-3 bg-blue-600 rounded-full">
                 @svg('heroicon-s-list-bullet', 'w-16 h-16 text-white')

@@ -39,7 +39,7 @@
                                 <a href="{{ route('unidades.edit', $unidade->id) }}" class="bg-purple-500 p-2 rounded-full text-white">
                                     @svg('heroicon-s-pencil-square', 'w-5 h-5')
                                 </a>
-                                <form action="{{ route('unidades.destroy', $unidade->id) }}" method="POST">
+                                <form action="{{ route('unidades.destroy', $unidade->id) }}" method="POST" onsubmit="return confirmDelete(event)">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="bg-red-500 p-2 rounded-full text-white">
@@ -53,4 +53,12 @@
             </table>
         @endif
     </div>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Evita o envio automático do formulário
+            if (confirm("AVISO: Ao deletar essa unidade de medida, todos os produtos relacionados serão deletados juntos. Deseja continuar mesmo assim?")) {
+                event.target.submit(); // Se o usuário confirmar, envia o formulário
+            }
+        }
+    </script>
 @endsection

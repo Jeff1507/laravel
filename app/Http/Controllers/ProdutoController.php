@@ -94,6 +94,9 @@ class ProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+
+        return redirect()->route('produtos.index')->with('sucesso', 'Produto removido com sucesso.');
     }
 }

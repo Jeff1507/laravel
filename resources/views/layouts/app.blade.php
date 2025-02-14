@@ -17,7 +17,7 @@
                 @svg('heroicon-s-user-group', 'w-5 h-5')
                 Clientes
             </a>
-            <a href="#" class="flex items-center gap-1 font-medium text-lg">
+            <a href="{{ route('produtos.index') }}" class="flex items-center gap-1 font-medium text-lg">
                 @svg('heroicon-s-shopping-cart', 'w-5 h-5')
                 Produtos
             </a>
@@ -31,7 +31,7 @@
             </a>
         </div>
     </nav>
-    <div class="container mx-auto p-4">
+    <div class="container flex items-center justify-center mx-auto p-4">
         @yield('content')
     </div>
 </body>

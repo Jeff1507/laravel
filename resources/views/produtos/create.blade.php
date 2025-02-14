@@ -68,7 +68,7 @@
 
             </div>
             <div class="mt-4 flex items-center justify-between">
-                <a href="#" class="bg-red-500 px-4 py-2 text-white rounded">Voltar</a>
+                <a href="{{ route('produtos.index') }}" class="bg-red-500 px-4 py-2 text-white rounded">Voltar</a>
                 <input type="submit" value="Cadastrar Produto" class="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-800">
             </div>
         </form>

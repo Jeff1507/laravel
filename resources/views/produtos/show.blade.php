@@ -3,8 +3,8 @@
 @section('title', 'Produtos')
 
 @section('content')
-    <div class="flex items-start gap-4 bg-white p-10 rounded-lg">
-        <div class="flex flex-col items-center justify-center gap-6 w-[300px]">
+    <div class="flex items-start gap-4 bg-white p-10 rounded-lg max-w-5xl self-center">
+        <div class="flex flex-col items-center justify-center gap-6 w-[280px]">
             <div class="flex flex-col gap-2 items-center justify-center">
                 <div class="w-40 h-40 rounded-full flex items-center justify-center">
                     <img src="{{ asset('img/produtos/' . $produto->imagem) }}" alt="Imagem do Produto" class="max-w-full max-h-full">
@@ -41,32 +41,22 @@
         <div class="w-px h-[420px] bg-gray-300 mr-3"></div>
         <div class="space-y-6 flex-1">
             <h2 class="font-bold text-2xl text-gray-600">Informações do Produto</h2>
-            <div class="grid grid-cols-4 gap-6">
-                <!--
+            <div class="grid grid-cols-2 gap-8">
                 <div>
-                    <h3 class="font-light text-sm">Estoque</h3>
+                    <h3 class="font-light text-sm">Quantidade</h3>
                     <p class="text-lg font-medium text-gray-600">{{ $produto->estoque }}</p>
                 </div>
                 <div>
                     <h3 class="font-light text-sm">Valor Unitário</h3>
                     <p class="text-lg font-medium text-gray-600">R$ {{ $produto->valor_unitario }}</p>
                 </div>
-                -->
-                <div class="col-span-1">
+                <div>
                     <h3 class="font-light text-sm">Categoria</h3>
                     <p class="text-lg font-medium text-gray-600">{{ $produto->categoria->nome }}</p>
                 </div>
-                <div class="col-span-3">
-                    <h3 class="font-light text-sm">Descrição da Categoria</h3>
-                    <p class="text-lg font-medium text-gray-600">{{ $produto->categoria->descricao }}</p>
-                </div>
-                <div class="col-span-1">
+                <div>
                     <h3 class="font-light text-sm">Unidade de Medida</h3>
                     <p class="text-lg font-medium text-gray-600">{{ $produto->unidade->sigla }}</p>
-                </div>
-                <div class="col-span-3">
-                    <h3 class="font-light text-sm">Descrição da Unidade de Medida</h3>
-                    <p class="text-lg font-medium text-gray-600">{{ $produto->unidade->descricao }}</p>
                 </div>
                 <div class="col-span-full w-full">
                     <h3 class="font-light text-sm">Descrição</h3>
