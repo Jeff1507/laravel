@@ -128,6 +128,15 @@ class ProdutoController extends Controller
     public function destroy(string $id)
     {
         $produto = Produto::findOrFail($id);
+        if ($produto->imagem && $produto->imagem != 'nulo.jpg') {
+            // Defina o caminho completo da imagem
+            $caminhoImagem = public_path('img/produtos/' . $produto->imagem);
+
+            // Verifique se o arquivo existe e exclua
+            if (file_exists($caminhoImagem)) {
+                unlink($caminhoImagem);
+            }
+        }
         $produto->delete();
 
         return redirect()->route('produtos.index')->with('sucesso', 'Produto removido com sucesso.');
