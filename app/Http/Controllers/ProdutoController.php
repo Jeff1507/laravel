@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Categoria;
 use App\Models\Unidade;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
@@ -36,7 +38,7 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:255',
-            'imagem' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imagem' => 'required|image|max:2048',
             'categoria_id' => 'required|exists:categorias,id',
             'unidade_id' => 'required|exists:unidades,id',
             'estoque' => 'required|integer|min:0',
@@ -44,20 +46,20 @@ class ProdutoController extends Controller
             'valor_unitario' => 'required|numeric|min:0',
         ]);
 
-        $imagemPath = null;
-        if ($request->hasFile('imagem')) {
-            $imagemPath = $request->file('imagem')->store('produtos', 'public');
+        $dados = $request->all();
+
+        if($request->hasFile('imagem')&& $request->file('imagem')->isValid()){
+            $requestImagem = $request->file('imagem');
+            $extensao = $requestImagem->extension();
+            $nomeImagem = md5($requestImagem->getClientOriginalName().strtotime("now")).'.'.$extensao;
+            $request->imagem->move(public_path('img/produtos'),$nomeImagem);
+            $dados['imagem'] = $nomeImagem;
+        }
+        else{
+            $dados['imagem'] = "nulo.jpg";
         }
 
-        Produto::create([
-            'nome' => $request->nome,
-            'imagem' => $imagemPath,
-            'categoria_id' => $request->categoria_id,
-            'unidade_id' => $request->unidade_id,
-            'estoque' => $request->estoque,
-            'descricao' => $request->descricao,
-            'valor_unitario' => $request->valor_unitario,
-        ]);
+        Produto::create($dados);
 
         return redirect()->route('produtos.index')->with('sucesso', 'Produto cadastrado com sucesso!');
     }
@@ -67,7 +69,8 @@ class ProdutoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $produto = Produto::with(['categoria', 'unidade'])->findOrFail($id);
+        return view('produtos.show', compact('produto'));
     }
 
     /**

@@ -21,11 +21,11 @@ class Produto extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
-    public function unidadeMedida()
+    public function unidade()
     {
-        return $this->belongsTo(Unidade::class);
+        return $this->belongsTo(Unidade::class, 'unidade_id');
     }
 }

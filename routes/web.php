@@ -10,14 +10,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/categorias', [CategoriaController::class,'index']);
 Route::resource('categorias', CategoriaController::class);
 
-Route::get('/clientes', [ClienteController::class, 'index']);
 Route::resource('clientes', ClienteController::class);
 
-Route::get('/unidades', [UnidadeController::class,'index']);
 Route::resource('unidades', UnidadeController::class);
 
-Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::resource('produtos', ProdutoController::class);
