@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Produtos')
+@section('title', 'Detalhes do Produto')
 
 @section('content')
     <div class="flex items-start gap-4 bg-white p-10 rounded-lg max-w-5xl self-center">

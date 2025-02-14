@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <label for="imagem" class="block font-semibold text-gray-600">Imagem</label>
-                    <img id="imagemPreview" src="#" alt="Imagem do Produto" style="max-width: 350px; display: none; margin-top: 10px; margin:0 auto;">
+                    <img id="imagemPreview" src="#" alt="Imagem do Produto" class="max-w-full max-h-40 mx-auto mt-2">
                     <input type="file" name="imagem" id="imagem" onchange="ImagemPreview(event)" class="w-full">
                 </div>
                 <div>
@@ -73,4 +73,15 @@
             </div>
         </form>
     </div>
+    <script>
+    function ImagemPreview(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('imagemPreview');
+            output.src = reader.result;
+            output.style.display = 'block';  // Exibe a imagem
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 @endsection

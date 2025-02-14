@@ -78,7 +78,11 @@ class ProdutoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $produto = Produto::with(['categoria', 'unidade'])->findOrFail($id);
+        $categorias = Categoria::all();
+        $unidades = Unidade::all();
+
+        return view('produtos.edit', compact('produto', 'categorias', 'unidades'));
     }
 
     /**
@@ -86,7 +90,36 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required|max:255',
+            'imagem' => 'nullable|image|max:2048',
+            'categoria_id' => 'required|exists:categorias,id',
+            'unidade_id' => 'required|exists:unidades,id',
+            'estoque' => 'required|integer|min:0',
+            'descricao' => 'nullable|max:255',
+            'valor_unitario' => 'required|numeric|min:0',
+        ]);
+
+        $produto = Produto::findOrFail($id);
+        $dados = $request->except('imagem');
+
+        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            if ($produto->imagem && file_exists(public_path('img/produtos/' . $produto->imagem))) {
+                unlink(public_path('img/produtos/' . $produto->imagem));
+            }
+
+            $requestImagem = $request->file('imagem');
+            $nomeImagem = md5($requestImagem->getClientOriginalName() . strtotime("now")) . '.' . $requestImagem->extension();
+
+            $requestImagem->move(public_path('img/produtos'), $nomeImagem);
+
+            $dados['imagem'] = $nomeImagem;
+        }
+
+        $produto->update($dados);
+
+        return redirect()->route('produtos.index')->with('sucesso', 'Produto atualizado com sucesso!');
+
     }
 
     /**
