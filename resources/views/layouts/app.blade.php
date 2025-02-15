@@ -29,7 +29,8 @@
                 @svg('heroicon-c-percent-badge', 'w-5 h-5')
                 Unidades de Medida
             </a>
-            <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 bg-purple-500 rounded-lg">
+            <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 border-2 border-white rounded-lg">
+                @svg('heroicon-c-arrow-left-end-on-rectangle', 'w-5 h-5')
                 Saidas de Estoque
             </a>
         </div>

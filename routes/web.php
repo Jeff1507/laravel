@@ -20,3 +20,6 @@ Route::resource('unidades', UnidadeController::class);
 Route::resource('produtos', ProdutoController::class);
 
 Route::resource('saidas_estoque', SaidaEstoqueController::class);
+
+Route::get('/saidas_estoque/{id}/qrcode', [SaidaEstoqueController::class, 'showQrCode'])
+    ->name('saidas_estoque.qrcode');

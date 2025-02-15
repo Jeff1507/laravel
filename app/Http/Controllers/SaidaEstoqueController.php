@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\SaidaEstoque;
 use App\Models\Produto;
@@ -78,14 +79,43 @@ class SaidaEstoqueController extends Controller
             // 🔹 Configurando opções para melhor leitura
             $options = new QROptions([
                 'outputType' => QRCode::OUTPUT_IMAGE_PNG,
-                'eccLevel' => QRCode::ECC_H, // Maior nível de correção de erro
-                'scale' => 5, // Tamanho do QR Code
+                'eccLevel' => QRCode::ECC_H,
+                'scale' => 5,
             ]);
         
             $qrCode = (new QRCode($options))->render($qrCodeData);
         
             return view('saidas_estoque.qrcode', compact('qrCode'))
                 ->with('sucesso', 'Retirada registrada com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+    public function showQrCode($id)
+    {
+        try {
+            $saida = SaidaEstoque::with('cliente', 'produto')->findOrFail($id);
+            
+            $dataRetirada = Carbon::parse($saida->data_retirada);
+    
+            $qrCodeData = json_encode([
+                'cliente' => $saida->cliente->nome,
+                'produto' => $saida->produto->nome,
+                'quantidade' => $saida->quantidade,
+                'valor_total' => "R$ " . number_format($saida->valor_total, 2, ',', '.'),
+                'data' => $dataRetirada->format('d/m/Y H:i'),
+            ]);
+    
+            $options = new QROptions([
+                'outputType' => QRCode::OUTPUT_IMAGE_PNG,
+                'eccLevel' => QRCode::ECC_H,
+                'scale' => 5,
+            ]);
+    
+            $qrCode = (new QRCode($options))->render($qrCodeData);
+    
+            return view('saidas_estoque.qrcode', compact('saida', 'qrCode'));
+            
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -30,6 +30,7 @@
                         <th scope="col" class="px-6 py-3">Quantidade</th>
                         <th scope="col" class="px-6 py-3">Valor Total</th>
                         <th scope="col" class="px-6 py-3">Data</th>
+                        <th scope="col" class="px-6 py-3">QR Code</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,12 @@
                             <td class="px-6 py-4">{{ $saida->quantidade }}</td>
                             <td class="px-6 py-4">R$ {{ $saida->valor_total }}</td>
                             <td class="px-6 py-4">{{ $saida->data_retirada }}</td>
+                            <td class="px-6 py-4 flex items-center">
+                                <a href="{{ route('saidas_estoque.qrcode', $saida->id) }}" class="bg-emerald-500 p-2 rounded-lg text-white flex items-center font-medium">
+                                    @svg('heroicon-c-qr-code', 'w-5 h-5 mr-1.5')
+                                    Gerar QR Code
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
