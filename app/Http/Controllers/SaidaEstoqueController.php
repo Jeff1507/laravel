@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\SaidaEstoque;
 use App\Models\Produto;
 use App\Models\Cliente;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 
 class SaidaEstoqueController extends Controller
 {
@@ -65,10 +66,29 @@ class SaidaEstoqueController extends Controller
                     . "Valor Total: R$ {$saida->valor_total}\n"
                     . "Data: {$saida->data_retirada}";
 
-        $qrCode = QrCode::size(200)->generate($qrCodeData);
-
-        return view('saidas_estoque.qrcode', compact('qrCode'))
-            ->with('sucesso', 'Retirada registrada com sucesso!');
+        try {
+            $qrCodeData = json_encode([
+                'cliente' => $saida->cliente->nome,
+                'produto' => $saida->produto->nome,
+                'quantidade' => $saida->quantidade,
+                'valor_total' => "R$ " . number_format($saida->valor_total, 2, ',', '.'),
+                'data' => $saida->data_retirada->format('d/m/Y H:i'),
+            ]);
+        
+            // 🔹 Configurando opções para melhor leitura
+            $options = new QROptions([
+                'outputType' => QRCode::OUTPUT_IMAGE_PNG,
+                'eccLevel' => QRCode::ECC_H, // Maior nível de correção de erro
+                'scale' => 5, // Tamanho do QR Code
+            ]);
+        
+            $qrCode = (new QRCode($options))->render($qrCodeData);
+        
+            return view('saidas_estoque.qrcode', compact('qrCode'))
+                ->with('sucesso', 'Retirada registrada com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
