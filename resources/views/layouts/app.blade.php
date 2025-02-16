@@ -30,10 +30,16 @@
                 Unidades de Medida
             </a>
         </div>
-        <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 border-2 bg-gray-600 rounded-lg">
-            @svg('heroicon-c-arrow-left-end-on-rectangle', 'w-5 h-5')
-            Saidas de Estoque
-        </a>
+        <div class="flex items-center gap-4">
+            <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 bg-rose-600 rounded-lg">
+                @svg('heroicon-c-arrow-left-end-on-rectangle', 'w-5 h-5')
+                Saidas de Estoque
+            </a> 
+            <a href="{{ route('relatorios') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 bg-emerald-600 rounded-lg">
+                @svg('heroicon-s-document', 'w-5 h-5')
+                Gerar Relatórios
+            </a>    
+        </div>
     </nav>
     <div class="container flex items-center justify-center mx-auto p-4">
         @yield('content')
