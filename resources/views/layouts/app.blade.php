@@ -14,26 +14,26 @@
         </a>
         <div class="flex items-center gap-8">
             <a href="{{ route('clientes.index') }}" class="flex items-center gap-1 font-medium text-lg">
-                @svg('heroicon-s-user-group', 'w-5 h-5')
+                @svg('heroicon-s-user-group', 'w-7 h-7')
                 Clientes
             </a>
             <a href="{{ route('produtos.index') }}" class="flex items-center gap-1 font-medium text-lg">
-                @svg('heroicon-s-shopping-cart', 'w-5 h-5')
+                @svg('heroicon-s-shopping-cart', 'w-7 h-7')
                 Produtos
             </a>
             <a href="{{ route('categorias.index') }}" class="flex items-center gap-1 font-medium text-lg">
-                @svg('heroicon-s-list-bullet', 'w-5 h-5')
+                @svg('heroicon-s-list-bullet', 'w-7 h-7')
                 Categorias
             </a>
             <a href="{{ route('unidades.index') }}" class="flex items-center gap-1 font-medium text-lg">
-                @svg('heroicon-c-percent-badge', 'w-5 h-5')
+                @svg('heroicon-c-percent-badge', 'w-7 h-7')
                 Unidades de Medida
             </a>
-            <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 border-2 border-white rounded-lg">
-                @svg('heroicon-c-arrow-left-end-on-rectangle', 'w-5 h-5')
-                Saidas de Estoque
-            </a>
         </div>
+        <a href="{{ route('saidas_estoque.index') }}" class="flex items-center gap-1 font-medium text-lg px-4 py-2 border-2 bg-gray-600 rounded-lg">
+            @svg('heroicon-c-arrow-left-end-on-rectangle', 'w-5 h-5')
+            Saidas de Estoque
+        </a>
     </nav>
     <div class="container flex items-center justify-center mx-auto p-4">
         @yield('content')
