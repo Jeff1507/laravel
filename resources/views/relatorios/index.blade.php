@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="space-y-6 p-10 bg-white rounded">
-        <h2 class="font-semibold text-2xl mb-10">
+        <h2 class="font-bold text-2xl text-gray-600 mb-10">
             Escolha uma opção para gerar Relatório:
         </h2>
         <div class="grid grid-cols-2 gap-8">

@@ -44,7 +44,8 @@ class UnidadeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $unidade = Unidade::findOrFail($id);
+        return view('unidades.show', compact('unidade'));
     }
 
     /**

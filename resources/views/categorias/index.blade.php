@@ -34,8 +34,17 @@
                     @foreach ($categorias as $categoria)
                         <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $categoria->nome}}</td>
-                            <td class="px-6 py-4">{{ $categoria->descricao}}</td>
+                            <td class="px-6 py-4">
+                                @if ($categoria->descricao)
+                                    {{ $categoria->descricao }}
+                                @else
+                                    Sem Descrição!
+                                @endif
+                            </td>
                             <td class="px-6 py-4 flex items-center gap-3">
+                                <a href="{{ route('categorias.show', $categoria->id) }}" class="bg-blue-500 p-2 rounded-full text-white">
+                                    @svg('heroicon-s-eye', 'w-5 h-5')
+                                </a>
                                 <a href="{{ route('categorias.edit', $categoria->id) }}" class="bg-purple-500 p-2 rounded-full text-white">
                                     @svg('heroicon-s-pencil-square', 'w-5 h-5')
                                 </a>

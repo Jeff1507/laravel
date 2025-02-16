@@ -34,8 +34,17 @@
                     @foreach ($unidades as $unidade)
                         <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $unidade->sigla}}</td>
-                            <td class="px-6 py-4">{{ $unidade->descricao}}</td>
+                            <td class="px-6 py-4">
+                                @if ($unidade->descricao)
+                                    {{ $unidade->descricao }}
+                                @else
+                                    Sem Descrição!
+                                @endif
+                            </td>
                             <td class="px-6 py-4 flex items-center gap-3">
+                                <a href="{{ route('unidades.show', $unidade->id) }}" class="bg-blue-500 p-2 rounded-full text-white">
+                                    @svg('heroicon-s-eye', 'w-5 h-5')
+                                </a>
                                 <a href="{{ route('unidades.edit', $unidade->id) }}" class="bg-purple-500 p-2 rounded-full text-white">
                                     @svg('heroicon-s-pencil-square', 'w-5 h-5')
                                 </a>
@@ -55,9 +64,9 @@
     </div>
     <script>
         function confirmDelete(event) {
-            event.preventDefault(); // Evita o envio automático do formulário
+            event.preventDefault();
             if (confirm("AVISO: Ao deletar essa unidade de medida, todos os produtos relacionados serão deletados juntos. Deseja continuar mesmo assim?")) {
-                event.target.submit(); // Se o usuário confirmar, envia o formulário
+                event.target.submit();
             }
         }
     </script>
